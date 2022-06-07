@@ -1,18 +1,15 @@
 import type { GetServerSideProps } from "next";
-import { useEffect, useState } from "react";
+import { useRouter } from "next/router";
+import { useEffect } from "react";
 
 import { AuthService, ItemService, OrderService } from "@/services";
-import { Item, PayMethod, PAY_METHOD_KOR } from "@/models";
-
-import { useRouter } from "next/router";
+import { Item } from "@/models";
 
 type ItemDetailPageProps = {
   item: Item;
 };
 
 export default function ItemDetailPage({ item }: ItemDetailPageProps) {
-  const [payMethod, setPayMethod] = useState<PayMethod>(PayMethod.Card);
-
   const router = useRouter();
 
   useEffect(() => {
@@ -46,10 +43,7 @@ export default function ItemDetailPage({ item }: ItemDetailPageProps) {
   );
 }
 
-export const getServerSideProps: GetServerSideProps = async ({
-  params,
-  req,
-}) => {
+export const getServerSideProps: GetServerSideProps = async ({ params }) => {
   const { id } = params;
   const item = await ItemService.get(Number(id));
   return {
