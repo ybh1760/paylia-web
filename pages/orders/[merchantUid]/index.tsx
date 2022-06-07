@@ -22,7 +22,7 @@ export default function OrderPage({ order }: OrderCheckoutPageProps) {
       amount: order.paidAmount,
       orderId: order.merchantUid,
       orderName: order.item.name,
-      customerName: "양병훈",
+      customerName: order.user.name,
       successUrl: "http://localhost:3001/orders/complete",
       failUrl: "http://localhost:3001/orders/fail",
     });
